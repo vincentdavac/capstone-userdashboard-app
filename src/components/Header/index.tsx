@@ -58,20 +58,22 @@ const Header = (props: {
 
           <Link className="block flex-shrink-0 lg:hidden" to="/">
             <img
-              src="/logo/Logo_only_lightmode.svg"
+              src={`${import.meta.env.BASE_URL}logo/Logo_light_mode.svg`}
               alt="Logo"
               width="50"
               height="50"
-              className="dark:hidden"
+              className="dark:hidden "
+              style={{ width: '150px', height: '30px' }}
             />
 
             {/* Dark mode logo */}
             <img
-              src="/logo/Logo_only_darkmode.svg"
+              src={`${import.meta.env.BASE_URL}logo/Logo_dark_mode.svg`}
               alt="Logo Dark"
               width="50"
               height="50"
               className="hidden dark:block"
+              style={{ width: '150px', height: '30px' }}
             />
           </Link>
         </div>
@@ -119,7 +121,7 @@ const Header = (props: {
             {/* <!-- Dark Mode Toggler --> */}
 
             {/* <!-- Notification Menu Area --> */}
-            <div className="hidden sm:block">
+            <div className="">
               <DropdownNotification />
             </div>
             {/* <!-- Notification Menu Area --> */}

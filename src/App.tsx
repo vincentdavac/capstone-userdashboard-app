@@ -20,6 +20,8 @@ import MobileWeatherForecastLayout from './pages/Mobile/WeatherForecast/WeatherF
 import SampleWeatherForecast from './pages/Mobile/WeatherForecast/SampleWeatherForecast';
 import ChatSupport from './pages/Mobile/ChatSupport/ChatSupport';
 import MobileHome from './pages/Mobile/Home/MobileHome';
+import Alert from './pages/Mobile/Alert/Alert';
+import MobileProfile from './pages/Mobile/Profile/MobileProfile';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -108,6 +110,8 @@ function App() {
         />
         <Route path="/mobile/chat-support" element={<ChatSupport />} />
         <Route path="/mobile/home" element={<MobileHome />} />
+        <Route path="/mobile/alert" element={<Alert />} />
+        <Route path="/mobile/profile" element={<MobileProfile />} />
 
         <Route
           path="/mobile/sample-forecast"
@@ -117,6 +121,7 @@ function App() {
 
       <Route path="/mobile/login" element={<MobileLogin />} />
       <Route path="/mobile/register" element={<MobileRegister />} />
+
       <Route
         path="/mobile/recover-account"
         element={<MobileRecoverAccount />}

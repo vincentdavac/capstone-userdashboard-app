@@ -1,34 +1,34 @@
-import { useEffect, useState } from "react";
-import { Button } from "../Common/Button";
+import { useEffect, useState } from 'react';
+import { Button } from '../Common/Button';
 import {
   ArrowRightIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-} from "lucide-react";
+} from 'lucide-react';
 
 // CRUD
 export default function Slider() {
   const slides = [
     {
       image:
-        "https://cdn.sealite.com/wp-content/uploads/20201127142046/Large-Ocean-Buoys.png",
-      title: "Grow Better with Hydroponics",
+        'https://cdn.sealite.com/wp-content/uploads/20201127142046/Large-Ocean-Buoys.png',
+      title: 'Grow Better with Hydroponics',
       description:
-        "Sustainable, soil-free growing solutions for your home or business. Experience faster growth and higher yields with our innovative hydroponics systems.",
+        'Sustainable, soil-free growing solutions for your home or business. Experience faster growth and higher yields with our innovative hydroponics systems.',
     },
     {
       image:
-        "https://www.resinextrad.com/en/wp-content/uploads/2020/01/weather-buoy.jpg",
-      title: "Year-Round Growing",
+        'https://www.resinextrad.com/en/wp-content/uploads/2020/01/weather-buoy.jpg',
+      title: 'Year-Round Growing',
       description:
         "Don't let seasons limit your garden. With hydroponics, grow fresh produce any time of year, regardless of outdoor conditions.",
     },
     {
       image:
-        "https://cdn.aiidatapro.net/media/f2/cb/23/t780x490/f2cb23b07a7b29e5384e21d6a0ad3a46.webp",
-      title: "Perfect for Any Space",
+        'https://cdn.aiidatapro.net/media/f2/cb/23/t780x490/f2cb23b07a7b29e5384e21d6a0ad3a46.webp',
+      title: 'Perfect for Any Space',
       description:
-        "From apartment countertops to commercial operations, our hydroponic systems are designed to fit your unique space and needs.",
+        'From apartment countertops to commercial operations, our hydroponic systems are designed to fit your unique space and needs.',
     },
   ];
 
@@ -75,7 +75,9 @@ export default function Slider() {
                 {slides.map((slide, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-opacity duration-500 ${index === currentSlide ? "opacity-100" : "opacity-0"}`}
+                    className={`absolute inset-0 transition-opacity duration-500 ${
+                      index === currentSlide ? 'opacity-100' : 'opacity-0'
+                    }`}
                   >
                     <img
                       src={slide.image}
@@ -106,7 +108,9 @@ export default function Slider() {
                     <button
                       key={index}
                       onClick={() => setCurrentSlide(index)}
-                      className={`h-3 w-3 rounded-full ${index === currentSlide ? "bg-[#87C4FF]" : "bg-white/50"}`}
+                      className={`h-3 w-3 rounded-full ${
+                        index === currentSlide ? 'bg-[#87C4FF]' : 'bg-white/50'
+                      }`}
                       aria-label={`Go to slide ${index + 1}`}
                     />
                   ))}

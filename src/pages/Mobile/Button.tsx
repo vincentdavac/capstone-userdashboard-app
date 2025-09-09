@@ -3,7 +3,7 @@ import {
   Home,
   AlertTriangle,
   MessageSquare,
-  Settings,
+  User,
   CloudMoon,
 } from 'lucide-react';
 
@@ -11,7 +11,6 @@ export default function MobileButton() {
   return (
     <nav className="fixed bottom-0 left-0 w-full bg-white border-t shadow-md dark:border-strokedark dark:bg-boxdark">
       <div className="flex justify-around items-center py-2">
-        {/* Dashboard */}
         <Link
           to="/mobile/forecast"
           className="flex flex-col items-center text-gray-600 hover:text-blue-600"
@@ -28,7 +27,6 @@ export default function MobileButton() {
           <span className="text-xs">Chat</span>
         </Link>
 
-        {/* Home (popped circle) */}
         <Link
           to="/mobile/home"
           className="absolute -top-6 flex flex-col items-center"
@@ -42,20 +40,21 @@ export default function MobileButton() {
         </Link>
         <div className="w-14" />
 
-        {/* Notification */}
         <Link
-          to="/mobile/Notifications"
+          to="/mobile/alert"
           className="flex flex-col items-center text-gray-600 hover:text-blue-600"
         >
           <AlertTriangle className="h-6 w-6" />
           <span className="text-xs">Alert</span>
         </Link>
 
-        {/* Settings */}
-        <button className="flex flex-col items-center text-gray-600 hover:text-blue-600">
-          <Settings className="h-6 w-6" />
-          <span className="text-xs">Settings</span>
-        </button>
+        <Link
+          to="/mobile/profile"
+          className="flex flex-col items-center text-gray-600 hover:text-blue-600"
+        >
+          <User className="h-6 w-6" />
+          <span className="text-xs">Profile</span>
+        </Link>
       </div>
     </nav>
   );

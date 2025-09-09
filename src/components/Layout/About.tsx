@@ -1,9 +1,9 @@
 export default function About() {
   return (
     <section
-      className="w-full bg-[#0353A4] py-16"
+      className="w-full bg-[#0353A4] py-16 "
       style={{
-        backgroundImage: `url('/wave.svg')`,
+        backgroundImage: `url('${import.meta.env.BASE_URL}wave.svg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

@@ -39,9 +39,12 @@ const ChatSupport = () => {
   return (
     <div
       className="flex flex-col 
-      w-full max-w-md  /* max width 400px */
-      h-[660px] sm:h-[600px] md:h-[650px] /* taller on larger screens */
-      border rounded-2xl shadow-lg bg-white mx-auto"
+    w-full max-w-md  /* max width 400px */
+    h-[660px] sm:h-[600px] md:h-[650px] /* taller on larger screens */
+    border rounded-2xl shadow-lg 
+    bg-white dark:bg-gray-900 
+    border-gray-200 dark:border-gray-700
+    mx-auto"
     >
       {/* Header */}
       <div className="p-3 bg-blue-600 text-white font-semibold rounded-t-2xl">
@@ -61,25 +64,31 @@ const ChatSupport = () => {
               className={`px-3 py-2 rounded-lg ${
                 msg.sender === 'user'
                   ? 'bg-blue-500 text-white'
-                  : 'bg-gray-200 text-gray-800'
+                  : 'bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-100'
               }`}
             >
               {msg.text}
             </div>
-            <span className="text-xs text-gray-400 mt-1">{msg.time}</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+              {msg.time}
+            </span>
           </div>
         ))}
       </div>
 
       {/* Input */}
-      <div className="p-3 flex items-center gap-2 border-t">
+      <div className="p-3 flex items-center gap-2 border-t border-gray-200 dark:border-gray-700">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSend()}
           placeholder="Type a message..."
-          className="flex-1 p-2 border rounded-lg focus:outline-none"
+          className="flex-1 p-2 border rounded-lg focus:outline-none 
+        border-gray-300 dark:border-gray-600 
+        bg-white dark:bg-gray-800 
+        text-gray-900 dark:text-gray-100
+        placeholder-gray-400 dark:placeholder-gray-500"
         />
         <button
           onClick={handleSend}
