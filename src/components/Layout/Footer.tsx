@@ -8,12 +8,18 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
           {/* Left Column - Brand Info */}
           <div className="space-y-4">
-            <h3
-              className="text-5xl font-light"
-              style={{ fontFamily: "'Playfair Display', serif" }}
+            {/* <h3
+              className="mb-2 text-2xl font-bold tracking-wide text-[#1E3A8A] sm:text-3xl md:text-5xl"
+              // style={{ fontFamily: "'Playfair Display', serif" }}
             >
               COASTELLA
-            </h3>
+            </h3> */}
+
+            <img
+              src={`${import.meta.env.BASE_URL}/logo/Logo.png`}
+              alt="logo"
+              className="dark:hidden w-60 h-auto"
+            />
             <p className="text-lg">Stay Informed, Stay Safe, Stay Ahead</p>
           </div>
 
@@ -21,7 +27,9 @@ export default function Footer() {
           <div className="grid grid-cols-2 gap-10">
             {/* Quick Links */}
             <div>
-              <h4 className="pb-3 text-3xl font-light">QUICK LINKS</h4>
+              <h4 className="mb-2 text-2xl font-bold tracking-wide text-[#1E3A8A] sm:text-3xl md:text-xl">
+                QUICK LINKS
+              </h4>
               <ul className="space-y-2">
                 <li>
                   <a href="#homepage-slider" className="hover:underline">
@@ -53,7 +61,9 @@ export default function Footer() {
 
             {/* Resources */}
             <div>
-              <h4 className="pb-3 text-3xl font-light">RESOURCES</h4>
+              <h4 className="mb-2 text-2xl font-bold tracking-wide text-[#1E3A8A] sm:text-3xl md:text-xl">
+                RESOURCES
+              </h4>
               <ul className="space-y-3">
                 <li>
                   <a href="#" className="hover:underline">
@@ -81,7 +91,9 @@ export default function Footer() {
 
           {/* Right Column - Contact Info */}
           <div>
-            <h4 className="pb-3 text-3xl font-light">CONTACT INFORMATION</h4>
+            <h4 className="mb-2 text-2xl font-bold tracking-wide text-[#1E3A8A] sm:text-3xl md:text-xl">
+              CONTACT INFORMATION
+            </h4>
             <ul className="space-y-3">
               <li>
                 Email:{' '}
@@ -89,7 +101,7 @@ export default function Footer() {
                   href="mailto:coastella.project@gmail.com"
                   className="hover:underline"
                 >
-                  coastella.project@gmail.com
+                  coastella.2025@gmail.com
                 </a>
               </li>
               <li className="flex items-center space-x-4">
@@ -117,12 +129,12 @@ export default function Footer() {
                       <path d="M23.498 6.186a2.974 2.974 0 0 0-2.093-2.106C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.405.58A2.974 2.974 0 0 0 .502 6.186C0 8.1 0 12 0 12s0 3.9.502 5.814a2.974 2.974 0 0 0 2.093 2.106C4.495 20.5 12 20.5 12 20.5s7.505 0 9.405-.58a2.974 2.974 0 0 0 2.093-2.106C24 15.9 24 12 24 12s0-3.9-.502-5.814zM9.75 15.568V8.432L15.818 12 9.75 15.568z" />
                     </svg>
                   </a>
-                  <a href="#">
+                  {/* <a href="#">
                     <InstagramIcon size={20} />
                   </a>
                   <a href="#">
                     <TwitterIcon size={20} />
-                  </a>
+                  </a> */}
                 </div>
               </li>
             </ul>
@@ -133,7 +145,7 @@ export default function Footer() {
         <div className="mt-16 border-t border-gray-200 pt-6">
           <div className="flex flex-col items-center space-y-2 text-center">
             <p className="font-light">
-              © 2025 COASTELLA | Coastal Operations Monitoring and Alert System
+              © 2025 Coastella | Coastal Operations Monitoring and Alert System
             </p>
           </div>
         </div>

@@ -63,10 +63,10 @@ export default function Prototype() {
       <div className="container mx-auto px-4">
         {/* Heading */}
         <div className="mb-12 text-center">
-          <h2 className="mb-4 text-2xl font-bold tracking-wide text-[#1E3A8A] sm:text-3xl md:text-5xl">
+          <h2 className="mb-2 text-2xl font-bold tracking-wide text-[#1E3A8A] sm:text-3xl md:text-5xl">
             THE COASTELLA PROTOTYPE
           </h2>
-          <p className="max-w-8xl mx-auto pt-5 text-center leading-relaxed text-[#023E8A] sm:text-xl md:text-2xl">
+          <p className="max-w-8xl mx-auto pt-5 text-center leading-relaxed text-[#023E8A] sm:text-xl md:text-xl">
             The COASTELLA prototype showcases a solar-powered buoy model
             equipped with sensors for monitoring water levels, wind speed, wave
             activity, and water quality. It also demonstrates GPS tracking,

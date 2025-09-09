@@ -14,14 +14,14 @@ const Navbar = () => {
       <div className="container mx-auto">
         <div className="relative  flex items-center justify-between">
           <div className="flex-shrink-0  max-w-full px-4">
-            <a href="/homepage" className="block w-full py-5">
+            <a href="/coastella/homepage" className="block w-full py-5">
               <img
                 src={`${import.meta.env.BASE_URL}/logo/Logo.png`}
                 alt="logo"
                 className="dark:hidden w-40 h-auto"
               />
               <img
-                src="https://cdn.tailgrids.com/assets/images/logo/logo-white.svg"
+                src={`${import.meta.env.BASE_URL}/logo/Logo.png`}
                 alt="logo"
                 className="hidden dark:block"
               />

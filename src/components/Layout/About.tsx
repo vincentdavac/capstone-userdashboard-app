@@ -1,24 +1,20 @@
-
 export default function About() {
   return (
     <section
       className="w-full bg-[#0353A4] py-16"
       style={{
         backgroundImage: `url('/wave.svg')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <div className="container mx-auto px-4">
-        <div className="mb-12 text-center">
-          <h2
-            className="mb-4 text-3xl font-bold text-[#FFFFFF] md:text-6xl"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
-            COASTELLA DEPLOYMENT MAP
+        <div className="mb-2 text-center">
+          <h2 className="mb-2 text-3xl font-bold text-[#FFFFFF] md:text-5xl">
+            ABOUT US
           </h2>
-          <p className="max-w-9xl mx-auto pt-7 text-justify text-2xl leading-relaxed text-[#FFFFFF]">
+          <p className="max-w-9xl mx-auto pt-7 text-justify text-xl  leading-relaxed text-[#FFFFFF]">
             COASTELLA strategically deploys its solar-powered, IoT-based buoys
             in coastal areas that are most vulnerable to environmental hazards.
             These buoys gather accurate, real-time data on water levels, wind
@@ -30,12 +26,12 @@ export default function About() {
           </p>
         </div>
         <div className="mb-16 flex flex-col items-center gap-8 pt-10 lg:flex-row">
-          <div className="pb-20 lg:w-1/2">
+          <div className="lg:w-1/2">
             <div className="overflow-hidden rounded-lg shadow-xl">
               <img
                 src="https://images.unsplash.com/photo-1558449028-b53a39d100fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
                 alt="Team members working on hydroponic systems"
-                className="h-120 w-full object-cover"
+                className="h-100 w-full object-cover"
               />
             </div>
           </div>
@@ -62,10 +58,10 @@ export default function About() {
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div className="rounded-lg bg-[#FFFFFF] p-6 shadow-md">
-            <h3 className="mb-4 text-center text-4xl font-bold text-[#023E8A]">
+            <h3 className="mb-2 text-center text-3xl font-bold text-[#023E8A]">
               OUR MISSION
             </h3>
-            <p className="pt-4 text-justify leading-relaxed text-[#023E8A]">
+            <p className="pt-4 text-justify text-xl leading-relaxed text-[#023E8A]">
               To provide a sustainable, solar-powered coastal monitoring and
               alert system that delivers real-time data and early warnings,
               empowering communities and authorities to enhance safety, disaster
@@ -73,10 +69,10 @@ export default function About() {
             </p>
           </div>
           <div className="rounded-lg bg-[#FFFFFF] p-6 shadow-md">
-            <h3 className="mb-4 text-center text-4xl font-bold text-[#023E8A]">
+            <h3 className="mb-2 text-center text-3xl font-bold text-[#023E8A]">
               OUR VISION
             </h3>
-            <p className="pt-4 text-justify leading-relaxed text-[#023E8A]">
+            <p className="pt-4 text-justify text-xl leading-relaxed text-[#023E8A]">
               To provide a sustainable, solar-powered coastal monitoring and
               alert system that delivers real-time data and early warnings,
               empowering communities and authorities to enhance safety, disaster
@@ -84,10 +80,10 @@ export default function About() {
             </p>
           </div>
           <div className="rounded-lg bg-[#FFFFFF] p-6 shadow-md">
-            <h3 className="mb-4 text-center text-4xl font-bold text-[#023E8A]">
+            <h3 className="mb-2 text-center text-3xl font-bold text-[#023E8A]">
               OUR VALUES
             </h3>
-            <p className="pt-4 text-justify leading-relaxed text-[#023E8A]">
+            <p className="pt-4 text-justify text-xl leading-relaxed text-[#023E8A]">
               To provide a sustainable, solar-powered coastal monitoring and
               alert system that delivers real-time data and early warnings,
               empowering communities and authorities to enhance safety, disaster
