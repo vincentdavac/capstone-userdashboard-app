@@ -1,0 +1,70 @@
+<div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+  <div className="flex flex-wrap items-center">
+    <div className="w-full border-stroke dark:border-strokedark  xl:border-l-2">
+      <div className="w-full p-4 sm:p-8 xl:p-12"> 
+        {/* 🔹 Adjusted padding for smaller devices */}
+        
+        <h2 className="mb-9 text-xl font-bold text-black dark:text-white sm:text-2xl"> 
+          {/* 🔹 Smaller font on mobile, bigger on desktop */}
+          Register Your Account
+        </h2>
+
+        <form>
+          <div className="mb-4">
+            <label className="mb-2 block font-medium text-black dark:text-white text-sm sm:text-base"> 
+              {/* 🔹 Smaller label text on mobile */}
+              Name
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Enter your full name"
+                className="w-full rounded-lg border border-stroke bg-transparent py-2 sm:py-3 md:py-4 px-4 sm:px-6 pr-10 text-sm sm:text-base text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+              />
+              {/* 🔹 Adjusted input padding & font size for mobile */}
+              <span className="absolute right-3 top-3 sm:right-4 sm:top-4">
+                {/* 🔹 Adjust icon position for mobile */}
+                <svg
+                  className="fill-current w-5 h-5 sm:w-6 sm:h-6"
+                  viewBox="0 0 22 22"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g opacity="0.5">
+                    <path d="..." />
+                    <path d="..." />
+                  </g>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          {/* 🔹 Repeat the same adjustments for Email, Password, Re-type Password */}
+          <div className="mb-5">
+            <input
+              type="submit"
+              value="Create account"
+              className="w-full cursor-pointer rounded-lg border border-primary bg-primary py-2 sm:py-3 md:py-4 text-sm sm:text-base text-white transition hover:bg-opacity-90"
+            />
+          </div>
+
+          <div className="mt-6 text-center space-y-2">
+            {/* 🔹 Added space-y for cleaner mobile view */}
+            <p className="text-sm sm:text-base">
+              Already have an account?{' '}
+              <button type="button" className="text-primary font-medium">
+                Login
+              </button>
+            </p>
+
+            <p className="text-sm sm:text-base">
+              Forgot your password?{' '}
+              <button type="button" className="text-primary font-medium">
+                Recover your account
+              </button>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
