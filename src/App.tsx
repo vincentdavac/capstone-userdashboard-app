@@ -22,6 +22,10 @@ import ChatSupport from './pages/Mobile/ChatSupport/ChatSupport';
 import MobileHome from './pages/Mobile/Home/MobileHome';
 import Alert from './pages/Mobile/Alert/Alert';
 import MobileProfile from './pages/Mobile/Profile/MobileProfile';
+import VerifySuccess from './pages/Mobile/VerifySuccess';
+import ProtectedRoute from './components/ProtectedRoute';
+import MobilePasswordReset from './pages/Mobile/PasswordReset'; // <-- make sure this is imported
+
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -93,40 +97,118 @@ function App() {
         }
       />
 
+
       {/* Dashboard routes (inside DefaultLayout) */}
-      <Route element={<DefaultLayout />}>
-        <Route path="/userdashboard" element={<Home />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/chart" element={<Chart />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/profile" element={<Profile />} />
-      </Route>
+{/* Dashboard routes (inside DefaultLayout) */}
+<Route element={<DefaultLayout />}>
 
-      {/* Mobile routes (inside MobileDefaultLayout) */}
-      <Route element={<MobileDefaultLayout />}>
-        <Route
-          path="/mobile/forecast"
-          element={<MobileWeatherForecastLayout />}
-        />
-        <Route path="/mobile/chat-support" element={<ChatSupport />} />
-        <Route path="/mobile/home" element={<MobileHome />} />
-        <Route path="/mobile/alert" element={<Alert />} />
-        <Route path="/mobile/profile" element={<MobileProfile />} />
+  <Route
+    path="/userdashboard"
+    element={
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/chat"
+    element={
+      <ProtectedRoute>
+        <Chat />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/chart"
+    element={
+      <ProtectedRoute>
+        <Chart />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/calendar"
+    element={
+      <ProtectedRoute>
+        <Calendar />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/profile"
+    element={
+      <ProtectedRoute>
+        <Profile />
+      </ProtectedRoute>
+    }
+  />
+</Route>
 
-        <Route
-          path="/mobile/sample-forecast"
-          element={<SampleWeatherForecast />}
-        />
-      </Route>
+
+{/* Mobile routes (inside MobileDefaultLayout) */}
+<Route element={<MobileDefaultLayout />}>
+  <Route
+    path="/mobile/forecast"
+    element={
+      <ProtectedRoute>
+        <MobileWeatherForecastLayout />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/mobile/chat-support"
+    element={
+      <ProtectedRoute>
+        <ChatSupport />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/mobile/home"
+    element={
+      <ProtectedRoute>
+        <MobileHome />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/mobile/alert"
+    element={
+      <ProtectedRoute>
+        <Alert />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/mobile/profile"
+    element={
+      <ProtectedRoute>
+        <MobileProfile />
+      </ProtectedRoute>
+    }
+  />
+
+  {/* Public route, no auth required */}
+  <Route
+    path="/mobile/sample-forecast"
+    element={<SampleWeatherForecast />}
+  />
+</Route>
+
 
       <Route path="/mobile/login" element={<MobileLogin />} />
+
       <Route path="/mobile/register" element={<MobileRegister />} />
+        <Route path="/verify-success" element={<VerifySuccess />} />
 
       <Route
         path="/mobile/recover-account"
         element={<MobileRecoverAccount />}
       />
-
+<Route
+  path="/reset-password"
+  element={<MobilePasswordReset />}
+/>
       {/* Fallback Route */}
       <Route path="*" element={<NotFound />} />
     </Routes>
