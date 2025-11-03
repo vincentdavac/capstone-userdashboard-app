@@ -16,7 +16,7 @@ export default function Footer() {
             </h3> */}
 
             <img
-              src={`${import.meta.env.BASE_URL}/logo/Logo.png`}
+              src={`/logo/Logo.png`}
               alt="logo"
               className="dark:hidden w-60 h-auto"
             />

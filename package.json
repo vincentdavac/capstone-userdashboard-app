@@ -18,6 +18,7 @@
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
     "apexcharts": "^3.41.0",
+    "axios": "^1.12.2",
     "chart.js": "^4.5.0",
     "flatpickr": "^4.6.13",
     "flowbite": "^3.1.2",
