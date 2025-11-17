@@ -1,135 +1,71 @@
 import React, { useState } from 'react';
-import MobileSignInModal from '../../pages/Authentication/ModalLogin';
-import MobileSignUpModal from '../../pages/Authentication/ModalRegister';
-import ModalRecoverAccount from '../../pages/Authentication/ModalRecoverAccount';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [showRecoverModal, setShowRecoverModal] = useState(false);
-
+  
   return (
     <header className={`flex w-full items-center bg-white dark:bg-dark`}>
       <div className="container mx-auto">
-        <div className="relative  flex items-center justify-between">
-          <div className="flex-shrink-0  max-w-full px-4">
+        <div className="relative flex items-center justify-between">
+          <div className="flex-shrink-0 px-4">
             <a href="/coastella/homepage" className="block w-full py-5">
               <img
-                src={`logo/Logo.png`}
+                src={`logo/lightmode.svg`}
                 alt="logo"
                 className="dark:hidden w-40 h-auto"
               />
               <img
-                src={`/logo/Logo.png`}
+                src={`/logo/lightmode.svg`}
                 alt="logo"
-                className="hidden dark:block"
+                className="hidden dark:block w-40 h-auto"
               />
             </a>
           </div>
-          <div className="flex w-full items-center justify-between px-4">
-            <div>
-              <button
-                onClick={() => setOpen(!open)}
-                id="navbarToggler"
-                className={` ${
-                  open && 'navbarTogglerActive'
-                } absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden`}
-              >
-                <span className="relative my-[6px] block h-[2px] w-[30px] bg-primary dark:bg-white"></span>
-                <span className="relative my-[6px] block h-[2px] w-[30px] bg-primary dark:bg-white"></span>
-                <span className="relative my-[6px] block h-[2px] w-[30px] bg-primary dark:bg-white"></span>
-              </button>
 
-              <nav
-                id="navbarCollapse"
-                className={`absolute right-4 top-full z-50 w-full max-w-[250px] rounded-lg bg-white ring-primary px-6 py-5 shadow dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:shadow-none lg:dark:bg-transparent ${
-                  !open && 'hidden'
-                } `}
-              >
-                <ul className="block lg:flex">
-                  <ListItem NavLink="#homepage-slider">Home</ListItem>
-                  <ListItem NavLink="#homepage-about">About</ListItem>
-                  <ListItem NavLink="#homepage-prototype">Prototype</ListItem>
-                  <ListItem NavLink="#homepage-team">Team</ListItem>
-                  <ListItem NavLink="#homepage-faqs">Faqs</ListItem>
-                  <ListItem NavLink="#homepage-feedback">Feedback</ListItem>
-                  <li className="lg:hidden">
-                    <button
-                      onClick={() => setShowLoginModal(true)}
-                      className="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white"
-                    >
-                      Login
-                    </button>
-
-                    <button
-                      onClick={() => setShowRegisterModal(true)}
-                      className="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white"
-                    >
-                      Register
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div className="hidden justify-end pr-16 sm:flex lg:pr-0">
-              <button
-                onClick={() => setShowLoginModal(true)}
-                className="px-6 py-2 text-base font-medium text-dark hover:text-primary dark:text-white"
-              >
-                Login
-              </button>
-
-              <button
-                onClick={() => setShowRegisterModal(true)}
-                className="rounded-md bg-primary px-7 py-3 text-base font-medium text-white hover:bg-primary/90"
-              >
-                Register
-              </button>
-            </div>
-
-            {/* Modal Button */}
-            <MobileSignInModal
-              show={showLoginModal}
-              onClose={() => setShowLoginModal(false)}
-              onOpenRegister={() => {
-                setShowLoginModal(false);
-                setShowRegisterModal(true);
-              }}
-              onOpenRecover={() => {
-                setShowLoginModal(false);
-                setShowRecoverModal(true);
-              }}
-            />
-
-            {/* Modal Button*/}
-            <MobileSignUpModal
-              show={showRegisterModal}
-              onClose={() => setShowRegisterModal(false)}
-              onOpenLogin={() => {
-                setShowRegisterModal(false);
-                setShowLoginModal(true);
-              }}
-              onOpenRecover={() => {
-                setShowRegisterModal(false);
-                setShowRecoverModal(true);
-              }}
-            />
-
-            {/* Recover Modal */}
-            <ModalRecoverAccount
-              show={showRecoverModal}
-              onClose={() => setShowRecoverModal(false)}
-              onOpenLogin={() => {
-                setShowRecoverModal(false);
-                setShowLoginModal(true);
-              }}
-              onOpenRegister={() => {
-                setShowRecoverModal(false);
-                setShowRegisterModal(true);
-              }}
-            />
+          <div className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2">
+            <nav className="flex items-center">
+              <ul className="flex space-x-12">
+                <ListItem NavLink="#homepage-slider">Home</ListItem>
+                <ListItem NavLink="#homepage-about">About</ListItem>
+                <ListItem NavLink="#homepage-prototype">Prototype</ListItem>
+                <ListItem NavLink="#homepage-team">Team</ListItem>
+                <ListItem NavLink="#homepage-faqs">FAQs</ListItem>
+                <ListItem NavLink="#homepage-feedback">Feedback</ListItem>
+              </ul>
+            </nav>
           </div>
+
+          <div className="hidden lg:block flex-shrink-0 w-40 px-4"></div>
+
+          <div className="flex lg:hidden">
+            <button
+              onClick={() => setOpen(!open)}
+              id="navbarToggler"
+              className={`${
+                open && 'navbarTogglerActive'
+              } rounded-lg px-3 py-[6px] ring-primary focus:ring-2`}
+            >
+              <span className="relative my-[6px] block h-[2px] w-[30px] bg-primary dark:bg-white"></span>
+              <span className="relative my-[6px] block h-[2px] w-[30px] bg-primary dark:bg-white"></span>
+              <span className="relative my-[6px] block h-[2px] w-[30px] bg-primary dark:bg-white"></span>
+            </button>
+          </div>
+
+          <nav
+            id="navbarCollapse"
+            className={`absolute top-full left-0 right-0 z-50 w-full bg-white px-6 py-5 shadow dark:bg-dark-2 lg:hidden ${
+              !open && 'hidden'
+            }`}
+          >
+            <ul className="block">
+              <ListItem NavLink="#homepage-slider">Home</ListItem>
+              <ListItem NavLink="#homepage-about">About</ListItem>
+              <ListItem NavLink="#homepage-prototype">Prototype</ListItem>
+              <ListItem NavLink="#homepage-team">Team</ListItem>
+              <ListItem NavLink="#homepage-faqs">FAQs</ListItem>
+              <ListItem NavLink="#homepage-feedback">Feedback</ListItem>
+            </ul>
+          </nav>
         </div>
       </div>
     </header>
@@ -145,15 +81,13 @@ interface ListItemProps {
 
 const ListItem: React.FC<ListItemProps> = ({ children, NavLink }) => {
   return (
-    <>
-      <li>
-        <a
-          href={NavLink}
-          className="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:ml-12 lg:inline-flex"
-        >
-          {children}
-        </a>
-      </li>
-    </>
+    <li>
+      <a
+        href={NavLink}
+        className="flex py-2 text-base font-medium text-body-color hover:text-dark dark:text-dark-6 dark:hover:text-white lg:py-5"
+      >
+        {children}
+      </a>
+    </li>
   );
 };

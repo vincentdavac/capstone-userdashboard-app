@@ -16,7 +16,7 @@ export default function Footer() {
             </h3> */}
 
             <img
-              src={`/logo/Logo.png`}
+              src={`/logo/lightmode.svg`}
               alt="logo"
               className="dark:hidden w-60 h-auto"
             />
@@ -38,7 +38,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a href="#homepage-about" className="hover:underline">
-                    About Coastella
+                    About X-Stream
                   </a>
                 </li>
                 <li>
@@ -98,10 +98,10 @@ export default function Footer() {
               <li>
                 Email:{' '}
                 <a
-                  href="mailto:coastella.project@gmail.com"
+                  href="mailto:xstream.2k25@gmail.com"
                   className="hover:underline"
                 >
-                  coastella.2025@gmail.com
+                  xstream.2k25@gmail.com
                 </a>
               </li>
               <li className="flex items-center space-x-4">
@@ -114,7 +114,7 @@ export default function Footer() {
                     <FacebookIcon size={20} />
                   </a>
                   <a
-                    href="https://www.youtube.com/@coastella.2025"
+                    href="https://www.youtube.com/@XStream-o3g"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -145,7 +145,7 @@ export default function Footer() {
         <div className="mt-16 border-t border-gray-200 pt-6">
           <div className="flex flex-col items-center space-y-2 text-center">
             <p className="font-light">
-              © 2025 Coastella | Coastal Operations Monitoring and Alert System
+              © 2025 X-STREAM | River Monitoring and Alert System. All rights reserved.
             </p>
           </div>
         </div>

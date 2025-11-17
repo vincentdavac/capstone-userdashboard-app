@@ -77,30 +77,35 @@ export default function Team() {
   ];
 
   return (
-    <section
-      className="w-full bg-[#0353A4] py-16"
-      style={{
-        backgroundImage: `url('/wave.svg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      <div className="container mx-auto px-4">
+    <section className="w-full py-16 relative">
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          background: `linear-gradient(180deg, #1E3A8A 0%, #3B82F6 50%, #60A5FA 100%)`,
+        }}
+      />
+      
+      <div 
+        className="absolute inset-0 z-0 opacity-100"
+        style={{
+          backgroundImage: `url('/wave.svg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="mb-16 text-center">
-          <h2
-            className="mb-2 text-3xl font-bold text-[#FFFFFF] md:text-5xl"
-            // style={{ fontFamily: "'Playfair Display', serif" }}
-          >
+          <h2 className="mb-2 text-3xl font-bold text-[#FFFFFF] md:text-5xl">
             MEET OUR TEAM
           </h2>
           <p className="mx-auto max-w-4xl pt-2 text-lg font-light text-[#FFFFFF] md:text-xl">
-            The dedicated team of innovators behind COASTELLA, working together
+            The dedicated team of innovators behind X-STREAM, working together
             to create safer and smarter coastal communities.
           </p>
         </div>
 
-        {/* Horizontal Scroll Wrapper - Fixed responsive widths */}
         <div
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-2 pb-4"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -108,37 +113,44 @@ export default function Team() {
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="w-full flex-shrink-0 snap-start overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)] xl:w-[calc(25%-0.75rem)]"
+              className="group relative w-full flex-shrink-0 snap-start overflow-hidden transition-all duration-300 hover:-translate-y-1 sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)] xl:w-[calc(25%-0.75rem)]"
             >
-              <div className="aspect-[4/4] w-full overflow-hidden">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="mb-2 text-xl leading-tight font-semibold text-gray-800">
-                  {member.name}
-                </h3>
-                <p className="mb-4 text-sm font-medium text-gray-600">
-                  {member.role}
-                </p>
-                <div className="flex space-x-3">
-                  <a
-                    href={member.linkedin}
-                    className="text-[#0353A4] transition-colors duration-200 hover:text-[#39A7FF]"
-                    aria-label={`${member.name}'s LinkedIn profile`}
-                  >
-                    <Linkedin size={20} />
-                  </a>
-                  <a
-                    href={member.twitter}
-                    className="text-[#0353A4] transition-colors duration-200 hover:text-[#39A7FF]"
-                    aria-label={`${member.name}'s Twitter profile`}
-                  >
-                    <Twitter size={20} />
-                  </a>
+              <div className="relative rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm shadow-lg flex flex-col h-full">
+                <div className="aspect-[4/4] w-full overflow-hidden flex-shrink-0 rounded-t-xl">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                
+                <div className="relative p-6 flex flex-col flex-1 min-h-[140px]">
+                  <div className="absolute -inset-x-1 inset-y-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                  
+                  <div className="relative z-10">
+                    <h3 className="text-xl leading-tight font-semibold text-white mb-2 line-clamp-2 min-h-[3rem] flex items-center">
+                      {member.name}
+                    </h3>
+                    <p className="text-sm font-medium text-white/80 mb-4 flex-shrink-0">
+                      {member.role}
+                    </p>
+                    <div className="flex space-x-3 mt-auto">
+                      <a
+                        href={member.linkedin}
+                        className="text-white/80 transition-colors duration-200 hover:text-white"
+                        aria-label={`${member.name}'s LinkedIn profile`}
+                      >
+                        <Linkedin size={20} />
+                      </a>
+                      <a
+                        href={member.twitter}
+                        className="text-white/80 transition-colors duration-200 hover:text-white"
+                        aria-label={`${member.name}'s Twitter profile`}
+                      >
+                        <Twitter size={20} />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

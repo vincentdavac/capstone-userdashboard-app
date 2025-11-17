@@ -12,23 +12,23 @@ export default function Slider() {
     {
       image:
         'https://cdn.sealite.com/wp-content/uploads/20201127142046/Large-Ocean-Buoys.png',
-      title: 'Grow Better with Hydroponics',
+      title: 'Instant Flood Alerts',
       description:
-        'Sustainable, soil-free growing solutions for your home or business. Experience faster growth and higher yields with our innovative hydroponics systems.',
+        'Receive immediate SMS notifications and dashboard alerts when river conditions become dangerous. Early warnings save lives and property.',
     },
     {
       image:
         'https://www.resinextrad.com/en/wp-content/uploads/2020/01/weather-buoy.jpg',
-      title: 'Year-Round Growing',
+      title: 'Early Warning Systems',
       description:
-        "Don't let seasons limit your garden. With hydroponics, grow fresh produce any time of year, regardless of outdoor conditions.",
+        "Get immediate alerts for potential flood risks and hazardous river conditions. Our solar-powered buoys ensure continuous monitoring even during extreme weather events.",
     },
     {
       image:
-        'https://cdn.aiidatapro.net/media/f2/cb/23/t780x490/f2cb23b07a7b29e5384e21d6a0ad3a46.webp',
-      title: 'Perfect for Any Space',
+        'https://coastalautonomy.com/wp-content/uploads/2024/03/L4-1024x576.jpg',
+      title: 'Sustainable River Protection',
       description:
-        'From apartment countertops to commercial operations, our hydroponic systems are designed to fit your unique space and needs.',
+        'Solar-powered technology with minimal environmental impact. Help preserve river ecosystems while enhancing community safety and disaster preparedness.',
     },
   ];
 
