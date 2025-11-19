@@ -19,7 +19,7 @@ const Loader: React.FC<LoaderProps> = ({ title, description }) => {
       {/* <h2 className="text-xl font-semibold text-gray-800">{title}</h2> */}
       <img
         className="dark:hidden h-10 mx-auto"
-        src="/logo/Coastella_text.svg"
+        src="/logo/x-stream-text-logo.svg"
         alt="Logo"
       />
 

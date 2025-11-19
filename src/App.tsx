@@ -57,12 +57,7 @@ function App() {
   }, [pathname]);
 
   if (loading && showLoaderRoutes.includes(pathname)) {
-    return (
-      <Loader
-        title="Coastella"
-        description="Stay Informed, Stay Safe, Stay Ahead"
-      />
-    );
+    return <Loader title="X-STREAM" description="River Monitoring System" />;
   }
 
   return (
@@ -73,7 +68,7 @@ function App() {
         path="/"
         element={
           <>
-            <Homepage /> <PageTitle title="Coastella | Homepage" />
+            <Homepage /> <PageTitle title="X-STREAM | Homepage" />
           </>
         }
       />
