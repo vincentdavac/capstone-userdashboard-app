@@ -145,7 +145,8 @@ export default function Footer() {
         <div className="mt-16 border-t border-gray-200 pt-6">
           <div className="flex flex-col items-center space-y-2 text-center">
             <p className="font-light">
-              © 2025 X-STREAM | River Monitoring and Alert System. All rights reserved.
+              © 2025 X-STREAM | River Monitoring and Alert System. All rights
+              reserved.
             </p>
           </div>
         </div>

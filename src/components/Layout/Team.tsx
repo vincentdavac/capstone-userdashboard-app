@@ -1,6 +1,12 @@
+import { useRef } from 'react';
 import { Linkedin, Twitter } from 'lucide-react';
 
 export default function Team() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
   const teamMembers = [
     {
       name: 'VINCENT AARON DAVAC',
@@ -75,17 +81,21 @@ export default function Team() {
       twitter: '#',
     },
   ];
-
   return (
     <section className="w-full py-16 relative">
-      <div 
+      {/* Custom CSS */}
+      <style>{`
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
+
+      <div
         className="absolute inset-0 z-0"
         style={{
           background: `linear-gradient(180deg, #1E3A8A 0%, #3B82F6 50%, #60A5FA 100%)`,
         }}
       />
-      
-      <div 
+      <div
         className="absolute inset-0 z-0 opacity-100"
         style={{
           backgroundImage: `url('/wave.svg')`,
@@ -94,26 +104,42 @@ export default function Team() {
           backgroundRepeat: 'no-repeat',
         }}
       />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="mb-16 text-center">
-          <h2 className="mb-2 text-3xl font-bold text-[#FFFFFF] md:text-5xl">
+          <h2 className="mb-2 text-3xl font-bold text-white md:text-5xl">
             MEET OUR TEAM
           </h2>
-          <p className="mx-auto max-w-4xl pt-2 text-lg font-light text-[#FFFFFF] md:text-xl">
+          <p className="mx-auto max-w-4xl pt-2 text-lg font-light text-white md:text-xl">
             The dedicated team of innovators behind X-STREAM, working together
             to create safer and smarter coastal communities.
           </p>
         </div>
 
+        {/* Scrollable container */}
         <div
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-2 pb-4"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto px-2 pb-4 hide-scrollbar"
+          onMouseDown={(e) => {
+            isDragging.current = true;
+            startX.current = e.pageX - scrollRef.current!.offsetLeft;
+            scrollLeft.current = scrollRef.current!.scrollLeft;
+          }}
+          onMouseLeave={() => (isDragging.current = false)}
+          onMouseUp={() => (isDragging.current = false)}
+          onMouseMove={(e) => {
+            if (!isDragging.current) return;
+            e.preventDefault();
+            const x = e.pageX - scrollRef.current!.offsetLeft;
+            const walk = x - startX.current;
+            scrollRef.current!.scrollLeft = scrollLeft.current - walk;
+          }}
+          style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
         >
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="group relative w-full flex-shrink-0 snap-start overflow-hidden transition-all duration-300 hover:-translate-y-1 sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)] xl:w-[calc(25%-0.75rem)]"
+              className="group flex-shrink-0 w-[250px] sm:w-[300px] md:w-[320px] lg:w-[350px] xl:w-[380px] transition-all duration-300 hover:-translate-y-1"
             >
               <div className="relative rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm shadow-lg flex flex-col h-full">
                 <div className="aspect-[4/4] w-full overflow-hidden flex-shrink-0 rounded-t-xl">
@@ -123,10 +149,10 @@ export default function Team() {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                
+
                 <div className="relative p-6 flex flex-col flex-1 min-h-[140px]">
                   <div className="absolute -inset-x-1 inset-y-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                  
+
                   <div className="relative z-10">
                     <h3 className="text-xl leading-tight font-semibold text-white mb-2 line-clamp-2 min-h-[3rem] flex items-center">
                       {member.name}
