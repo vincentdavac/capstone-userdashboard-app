@@ -57,7 +57,12 @@ function App() {
   }, [pathname]);
 
   if (loading && showLoaderRoutes.includes(pathname)) {
-    return <Loader title="X-STREAM" description="River Monitoring System" />;
+    return (
+      <Loader
+        title="X-STREAM"
+        description="A River Monitoring and Alert System."
+      />
+    );
   }
 
   return (
@@ -68,7 +73,7 @@ function App() {
         path="/"
         element={
           <>
-            <Homepage /> <PageTitle title="X-STREAM | Homepage" />
+            <Homepage /> <PageTitle title="Homepage | X-Stream" />
           </>
         }
       />

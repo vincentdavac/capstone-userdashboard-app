@@ -1,89 +1,78 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Linkedin, Twitter } from 'lucide-react';
+import API_BASE_URL from '../config/coreApi';
 
-export default function Team() {
+export interface TeamData {
+  id: number;
+  attributes: {
+    userName: string;
+    role: string;
+    image: string;
+    facebookLink: string | null;
+    twitterLink: string | null;
+    linkedinLink: string | null;
+    instagramLink: string | null;
+    isArchived: boolean;
+    createdDate: string;
+    createdTime: string;
+    updatedDate: string;
+    updatedTime: string;
+  };
+}
+interface Props {
+  refresh?: boolean;
+}
+
+export default function Team({ refresh }: Props) {
+  const [loading, setLoading] = useState(true);
+
+  const [teamMembers, setTeamMembers] = useState<TeamData[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
   const scrollLeft = useRef(0);
 
-  const teamMembers = [
-    {
-      name: 'VINCENT AARON DAVAC',
-      role: 'LEADER',
-      image:
-        'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-      bio: 'Ph.D. in Agricultural Engineering with over 15 years of experience in hydroponic systems design.',
-      linkedin: '#',
-      twitter: '#',
-    },
-    {
-      name: 'SEAN RUZZEL GONZALO',
-      role: 'FRONT END DEVELOPER',
-      image:
-        'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-      bio: 'Former NASA plant researcher specializing in closed-system agriculture and nutrient optimization.',
-      linkedin: '#',
-      twitter: '#',
-    },
-    {
-      name: 'LUIS MARIO CARLOS',
-      role: 'BACK END DEVELOPER',
-      image:
-        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-      bio: 'Industrial designer with a passion for creating beautiful, functional growing systems for any space.',
-      linkedin: '#',
-      twitter: '#',
-    },
-    {
-      name: 'ALEXIS SACRO',
-      role: 'BACKEND DEVELOPER',
-      image:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-      bio: 'Environmental scientist focused on reducing the ecological footprint of food production systems.',
-      linkedin: '#',
-      twitter: '#',
-    },
-    {
-      name: 'HELEN RODAS',
-      role: 'UI/UX DESIGNER',
-      image:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-      bio: 'Environmental scientist focused on reducing the ecological footprint of food production systems.',
-      linkedin: '#',
-      twitter: '#',
-    },
-    {
-      name: 'BERNADETTE BUMADILLA',
-      role: 'RESEARCHER',
-      image:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-      bio: 'Environmental scientist focused on reducing the ecological footprint of food production systems.',
-      linkedin: '#',
-      twitter: '#',
-    },
-    {
-      name: 'AIRA ANZA',
-      role: 'RESEARCHER',
-      image:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-      bio: 'Environmental scientist focused on reducing the ecological footprint of food production systems.',
-      linkedin: '#',
-      twitter: '#',
-    },
-    {
-      name: 'JOMAR ABALOS',
-      role: 'HARDWARE ENGINEER',
-      image:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
-      bio: 'Environmental scientist focused on reducing the ecological footprint of food production systems.',
-      linkedin: '#',
-      twitter: '#',
-    },
-  ];
+  // ✅ Fetch Active Team Members
+  const fetchActiveTeams = async () => {
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/public-active-teams`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.data) {
+        setTeamMembers(data.data);
+      }
+    } catch (err) {
+      console.error('Error fetching active teams:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchActiveTeams();
+  }, [refresh]);
+
+  if (loading) {
+    return (
+      <section className="w-full py-16 flex justify-center items-center">
+        <div className="flex justify-center items-center gap-2 text-gray-500">
+          <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#453EFE]" />
+          Loading Team...
+        </div>{' '}
+      </section>
+    );
+  }
+
   return (
     <section className="w-full py-16 relative">
-      {/* Custom CSS */}
       <style>{`
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -110,7 +99,7 @@ export default function Team() {
           <h2 className="mb-2 text-3xl font-bold text-white md:text-5xl">
             MEET OUR TEAM
           </h2>
-          <p className="mx-auto max-w-4xl pt-2 text-lg font-light text-white md:text-xl">
+          <p className="mx-auto max-w-6xl pt-2 text-lg font-light text-white md:text-xl">
             The dedicated team of innovators behind X-STREAM, working together
             to create safer and smarter coastal communities.
           </p>
@@ -136,51 +125,63 @@ export default function Team() {
           }}
           style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
         >
-          {teamMembers.map((member, index) => (
+          {teamMembers.map((member) => (
             <div
-              key={index}
-              className="group flex-shrink-0 w-[250px] sm:w-[300px] md:w-[320px] lg:w-[350px] xl:w-[380px] transition-all duration-300 hover:-translate-y-1"
+              key={member.id}
+              className="group relative w-full flex-shrink-0 snap-start overflow-hidden transition-all duration-300 hover:-translate-y-1 
+              sm:w-[calc(45%-0.5rem)] lg:w-[calc(30%-0.75rem)] xl:w-[calc(25%-0.75rem)]"
             >
               <div className="relative rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm shadow-lg flex flex-col h-full">
                 <div className="aspect-[4/4] w-full overflow-hidden flex-shrink-0 rounded-t-xl">
                   <img
-                    src={member.image}
-                    alt={member.name}
+                    src={member.attributes.image}
+                    alt={member.attributes.userName}
                     className="h-full w-full object-cover"
                   />
                 </div>
 
-                <div className="relative p-6 flex flex-col flex-1 min-h-[140px]">
+                <div className="relative p-4 flex flex-col flex-1 min-h-[120px]">
                   <div className="absolute -inset-x-1 inset-y-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
 
                   <div className="relative z-10">
-                    <h3 className="text-xl leading-tight font-semibold text-white mb-2 line-clamp-2 min-h-[3rem] flex items-center">
-                      {member.name}
+                    <h3 className="text-lg leading-tight font-semibold text-white mb-1 line-clamp-2 min-h-[2.5rem] flex items-center">
+                      {member.attributes.userName}
                     </h3>
-                    <p className="text-sm font-medium text-white/80 mb-4 flex-shrink-0">
-                      {member.role}
+                    <p className="text-sm font-medium text-white/80 mb-3 flex-shrink-0">
+                      {member.attributes.role}
                     </p>
+
                     <div className="flex space-x-3 mt-auto">
-                      <a
-                        href={member.linkedin}
-                        className="text-white/80 transition-colors duration-200 hover:text-white"
-                        aria-label={`${member.name}'s LinkedIn profile`}
-                      >
-                        <Linkedin size={20} />
-                      </a>
-                      <a
-                        href={member.twitter}
-                        className="text-white/80 transition-colors duration-200 hover:text-white"
-                        aria-label={`${member.name}'s Twitter profile`}
-                      >
-                        <Twitter size={20} />
-                      </a>
+                      {member.attributes.linkedinLink && (
+                        <a
+                          href={member.attributes.linkedinLink}
+                          target="_blank"
+                          className="text-white/80 transition-colors duration-200 hover:text-white"
+                        >
+                          <Linkedin size={18} />
+                        </a>
+                      )}
+                      {member.attributes.twitterLink && (
+                        <a
+                          href={member.attributes.twitterLink}
+                          target="_blank"
+                          className="text-white/80 transition-colors duration-200 hover:text-white"
+                        >
+                          <Twitter size={18} />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           ))}
+
+          {teamMembers.length === 0 && (
+            <p className="text-white text-center w-full">
+              No active team members found.
+            </p>
+          )}
         </div>
       </div>
     </section>

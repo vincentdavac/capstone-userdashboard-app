@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  
+
   return (
     <header className={`flex w-full items-center bg-white dark:bg-dark`}>
       <div className="container mx-auto">
         <div className="relative flex items-center justify-between">
           <div className="flex-shrink-0 px-4">
-            <a href="/coastella/homepage" className="block w-full py-5">
+            <a href="/" className="block w-full py-5">
               <img
                 src={`logo/lightmode.svg`}
                 alt="logo"
@@ -37,7 +37,7 @@ const Navbar = () => {
 
           <div className="hidden lg:block flex-shrink-0 w-40 px-4"></div>
 
-          <div className="flex lg:hidden">
+          {/* <div className="flex lg:hidden">
             <button
               onClick={() => setOpen(!open)}
               id="navbarToggler"
@@ -49,7 +49,7 @@ const Navbar = () => {
               <span className="relative my-[6px] block h-[2px] w-[30px] bg-primary dark:bg-white"></span>
               <span className="relative my-[6px] block h-[2px] w-[30px] bg-primary dark:bg-white"></span>
             </button>
-          </div>
+          </div> */}
 
           <nav
             id="navbarCollapse"

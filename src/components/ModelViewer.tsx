@@ -8,23 +8,33 @@ type GLTFResult = {
 };
 
 function Model() {
-  const { scene } = useGLTF('/no_weights.glb') as GLTFResult;
+  const { scene } = useGLTF('/latest buoy prototype 1120.glb') as GLTFResult;
   const ref = useRef<THREE.Group>(null);
   const { camera } = useThree();
 
   useEffect(() => {
     if (ref.current) {
       const box = new THREE.Box3().setFromObject(ref.current);
-      const size = box.getSize(new THREE.Vector3()).length();
+      const size = box.getSize(new THREE.Vector3());
       const center = box.getCenter(new THREE.Vector3());
 
-      ref.current.position.x += ref.current.position.x - center.x;
-      ref.current.position.y += ref.current.position.y - center.y;
-      ref.current.position.z += ref.current.position.z - center.z;
+      ref.current.position.sub(center);
 
-      const distance = size * 0.7;
-      camera.position.set(distance, distance, distance);
-      camera.lookAt(center);
+      const maxDim = Math.max(size.x, size.y, size.z);
+
+      if ((camera as THREE.PerspectiveCamera).isPerspectiveCamera) {
+        const perspectiveCamera = camera as THREE.PerspectiveCamera;
+        const fov = perspectiveCamera.fov * (Math.PI / 180);
+
+        const cameraZ = Math.abs(maxDim / Math.sin(fov / 2));
+        perspectiveCamera.position.set(0, 0, cameraZ * 0.55);
+        perspectiveCamera.lookAt(0, 0, 0);
+      }
+
+      if (maxDim < 1) {
+        const scaleFactor = 5 / maxDim;
+        ref.current.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      }
     }
   }, [camera]);
 
@@ -35,27 +45,26 @@ export default function ModelViewer() {
   return (
     <Canvas
       camera={{ fov: 45, near: 0.1, far: 1000 }}
-      style={{
-        background: 'transparent',
-        width: '110%',
-        height: '107%',
-        borderRadius: '8px',
-      }}
+      style={{ width: '100%', height: '100%', borderRadius: '8px' }}
       gl={{ antialias: true, alpha: true }}
+      onCreated={({ gl }) => {
+        gl.toneMapping = THREE.ACESFilmicToneMapping;
+        gl.outputColorSpace = THREE.SRGBColorSpace;
+      }}
     >
-      <ambientLight intensity={0.8} />
-      <directionalLight position={[10, 10, 10]} intensity={1.2} />
-      <pointLight position={[0, -5, -5]} intensity={0.6} />
+      <ambientLight intensity={0.3} />
+      <directionalLight position={[10, 10, 10]} intensity={0.7} />
+      <pointLight position={[0, -5, -5]} intensity={0.3} />
       <Suspense fallback={null}>
         <Model />
       </Suspense>
       <OrbitControls
         enableZoom
         enablePan={false}
-        minDistance={2}
-        maxDistance={50}
         autoRotate
         autoRotateSpeed={1.5}
+        minDistance={2}
+        maxDistance={50}
       />
     </Canvas>
   );

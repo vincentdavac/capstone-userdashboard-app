@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { Button } from '../Common/Button';
 import {
@@ -6,63 +7,129 @@ import {
   ChevronRightIcon,
 } from 'lucide-react';
 
-// CRUD
-export default function Slider() {
-  const slides = [
-    {
-      image:
-        'https://cdn.sealite.com/wp-content/uploads/20201127142046/Large-Ocean-Buoys.png',
-      title: 'Instant Flood Alerts',
-      description:
-        'Receive immediate SMS notifications and dashboard alerts when river conditions become dangerous. Early warnings save lives and property.',
-    },
-    {
-      image:
-        'https://www.resinextrad.com/en/wp-content/uploads/2020/01/weather-buoy.jpg',
-      title: 'Early Warning Systems',
-      description:
-        "Get immediate alerts for potential flood risks and hazardous river conditions. Our solar-powered buoys ensure continuous monitoring even during extreme weather events.",
-    },
-    {
-      image:
-        'https://coastalautonomy.com/wp-content/uploads/2024/03/L4-1024x576.jpg',
-      title: 'Sustainable River Protection',
-      description:
-        'Solar-powered technology with minimal environmental impact. Help preserve river ecosystems while enhancing community safety and disaster preparedness.',
-    },
-  ];
+import GetStartedModal from '../Common/modals/GetStartedModal';
+import LearnMoreModal from '../Common/modals/LearnMoreModal';
 
+import API_BASE_URL from '../config/coreApi';
+
+interface SliderAttributes {
+  title: string;
+  description: string;
+  image: string;
+  isArchive?: boolean | number | string;
+}
+
+interface SliderData {
+  id: number;
+  attributes: SliderAttributes;
+}
+
+export default function Slider() {
+  const [slides, setSlides] = useState<SliderData[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  // Modals
+  const [openGetStarted, setOpenGetStarted] = useState(false);
+  const [openLearnMore, setOpenLearnMore] = useState(false);
+
+  const fetchSliders = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/public-sliders`, {
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      const data = await res.json();
+
+      if (res.ok && Array.isArray(data.data)) {
+        // Optional: filter archived sliders
+        const activeSliders = data.data.filter(
+          (item: SliderData) => !item.attributes.isArchive,
+        );
+
+        setSlides(activeSliders);
+      } else {
+        console.error('Failed fetching sliders:', data);
+      }
+    } catch (err) {
+      console.error('Error fetching sliders:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSliders();
+  }, []);
+
+  /* =======================
+     Slider Controls
+  ======================= */
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
+
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-  // Auto-advance slides
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
-  });
+    if (slides.length === 0) return;
 
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
+  }, [slides]);
+
+  /* =======================
+     States
+  ======================= */
+  if (loading) {
+    return (
+      <div className="w-full text-center py-24 text-gray-500">
+        Loading slider...
+      </div>
+    );
+  }
+
+  if (slides.length === 0) {
+    return (
+      <div className="w-full text-center py-24 text-xl font-semibold">
+        No slider data available.
+      </div>
+    );
+  }
+
+  const active = slides[currentSlide].attributes;
+
+  /* =======================
+     Render
+  ======================= */
   return (
     <>
       <section className="relative right-1/2 left-1/2 -mr-[50vw] -ml-[50vw] w-screen bg-[#FFFFF]">
         <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="flex flex-col items-center md:flex-row">
-            <div className=" mb-10 md:mb-0 md:w-1/2">
-              <h1 className="mb-4 text-4xl leading-tight font-bold text-[#023E8A] md:text-5xl lg:text-5xl">
-                {slides[currentSlide].title}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12">
+            {/* LEFT CONTENT */}
+            <div className="mb-10 md:mb-0 md:w-1/2 pr-8 max-w-xl">
+              <h1 className="mb-4 text-4xl leading-tight font-bold text-[#023E8A] md:text-5xl lg:text-5xl dark:text-white break-words">
+                {active.title}
               </h1>
-              <p className="mb-8 max-w-lg text-lg text-[#000000] md:text-xl">
-                {slides[currentSlide].description}
+
+              <p className="mb-8 text-lg text-[#000000] md:text-xl dark:text-gray-300 break-words">
+                {active.description}
               </p>
+
               <div className="flex flex-col gap-4 sm:flex-row">
-                <Button>Get Started</Button>
-                <Button variant="outline">
+                <Button onClick={() => setOpenGetStarted(true)}>
+                  Get Started
+                </Button>
+
+                <Button
+                  variant="outline"
+                  onClick={() => setOpenLearnMore(true)}
+                >
                   <span className="flex items-center">
                     Learn More
                     <ArrowRightIcon size={18} className="ml-2" />
@@ -70,56 +137,80 @@ export default function Slider() {
                 </Button>
               </div>
             </div>
+
+            {/* RIGHT SIDE IMAGE */}
             <div className="relative w-full md:w-1/2">
               <div className="relative h-[300px] min-h-[300px] overflow-hidden rounded-lg shadow-xl md:h-[400px]">
                 {slides.map((slide, index) => (
                   <div
-                    key={index}
+                    key={slide.id}
                     className={`absolute inset-0 transition-opacity duration-500 ${
                       index === currentSlide ? 'opacity-100' : 'opacity-0'
                     }`}
                   >
                     <img
-                      src={slide.image}
-                      alt="Hydroponic growing system"
+                      src={slide.attributes.image}
+                      alt={slide.attributes.title}
                       className="h-full w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-[#386742]/20 to-transparent"></div>
                   </div>
                 ))}
-                {/* Slider controls */}
+
+                {/* Prev Button */}
                 <button
                   onClick={prevSlide}
-                  className="absolute top-1/2 left-2 -translate-y-1/2 rounded-full bg-white/70 p-2 text-[#39A7FF] hover:bg-white"
-                  aria-label="Previous slide"
+                  className="absolute top-1/2 left-2 -translate-y-1/2 rounded-full bg-white/70 p-2 text-[#453EFE] hover:bg-white dark:bg-gray-900/70 dark:hover:bg-gray-900"
                 >
                   <ChevronLeftIcon size={24} />
                 </button>
+
+                {/* Next Button */}
                 <button
                   onClick={nextSlide}
-                  className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-white/70 p-2 text-[#39A7FF] hover:bg-white"
-                  aria-label="Next slide"
+                  className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-white/70 p-2 text-[#453EFE] hover:bg-white dark:bg-gray-900/70 dark:hover:bg-gray-900"
                 >
                   <ChevronRightIcon size={24} />
                 </button>
-                {/* Slide indicators */}
+
+                {/* Indicators */}
                 <div className="absolute right-0 bottom-4 left-0 flex justify-center space-x-2">
-                  {slides.map((_, index) => (
+                  {slides.map((_slide, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentSlide(index)}
                       className={`h-3 w-3 rounded-full ${
-                        index === currentSlide ? 'bg-[#87C4FF]' : 'bg-white/50'
+                        index === currentSlide ? 'bg-[#453EFE]' : 'bg-white/50'
                       }`}
-                      aria-label={`Go to slide ${index + 1}`}
                     />
                   ))}
                 </div>
+
+                <GetStartedModal
+                  open={openGetStarted}
+                  onClose={() => setOpenGetStarted(false)}
+                />
+
+                <LearnMoreModal
+                  open={openLearnMore}
+                  onClose={() => setOpenLearnMore(false)}
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Modals */}
+      <GetStartedModal
+        open={openGetStarted}
+        onClose={() => setOpenGetStarted(false)}
+      />
+
+      <LearnMoreModal
+        open={openLearnMore}
+        onClose={() => setOpenLearnMore(false)}
+      />
     </>
   );
 }
